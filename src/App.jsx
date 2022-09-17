@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { nanoid } from 'nanoid'
 
 function App() {
 
 
   const [tarea, setTarea] = useState('')
+  const [tareas, setTareas] = useState([])
 
 
   const agregarTarea = (e) => {
@@ -12,8 +14,13 @@ function App() {
       console.log('Elemento vacio')
       return 
     }
-    console.log('tarea') // no se despliega hasta que la tarea este vacia
+    console.log(tarea) // no se despliega hasta que la tarea este vacia
 
+    setTareas([...tareas, 
+      { id: nanoid(), 
+        NombreTarea: tarea }]);
+
+    setTarea('') //limpia el formulario
   }
   return (
     <div className="container mt-5">
