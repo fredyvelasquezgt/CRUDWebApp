@@ -39,6 +39,7 @@ function App() {
           className="form-control mb-2"
           placeholder="Ingrese tarea"
           onChange={( e => setTarea(e.target.value))} //relacion de input con el estado
+          value={tarea}  
            />
            <button className="btn-dark btn-block" type="submit">Agregar</button>
         </form>
