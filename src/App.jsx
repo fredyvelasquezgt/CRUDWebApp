@@ -1,4 +1,20 @@
+import { useState } from "react";
+
 function App() {
+
+
+  const [tarea, setTarea] = useState('')
+
+
+  const agregarTarea = (e) => {
+    e.preventDefault() //evita que se proceso el formulario con el get
+    if(!tarea.trim()) {
+      console.log('Elemento vacio')
+      return 
+    }
+    console.log('tarea') // no se despliega hasta que la tarea este vacia
+
+  }
   return (
     <div className="container mt-5">
       <h1 className="text-center" >CRUD simple</h1>
@@ -16,6 +32,16 @@ function App() {
         </div>
         <div className="col-4">
         <h4 className="text-center">Formulario</h4>
+        <form
+          onSubmit={agregarTarea}>
+          <input 
+          type="text" 
+          className="form-control mb-2"
+          placeholder="Ingrese tarea"
+          onChange={( e => setTarea(e.target.value))} //relacion de input con el estado
+           />
+           <button className="btn-dark btn-block" type="submit">Agregar</button>
+        </form>
         </div>
       </div>
     </div>
