@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center" >CRUD simple</h1>
+      <h1 className="text-center" >CRUD simple de Fredy</h1>
       <hr />
       <div className="row">
         <div className="col-8">
@@ -125,9 +125,10 @@ function App() {
 
             {
               modoEdicion ? (
-                <button className="btn-warning btn-block" type="submit">Editar</button>
+                <button className="btn btn-warning btn-block" type="submit">Editar</button>
               ) : (
-                <button className="btn-dark btn-block" type="submit">Agregar</button>
+                <button className="btn btn-dark btn-block" type="submit">Agregar</button>
+               
               )
             }
 
