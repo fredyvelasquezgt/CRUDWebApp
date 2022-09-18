@@ -8,12 +8,16 @@ function App() {
   const [tareas, setTareas] = useState([])
   //valor false porque cambia cuando presiono 'agregar'
   const [modoEdicion, setModoEdicion] = useState(false)
+  const [id, setId] = useState('')
+  //Toma los errores del form
+  const [error, setError] = useState(null)
 
 
   const agregarTarea = (e) => {
     e.preventDefault() //evita que se proceso el formulario con el get
     if (!tarea.trim()) {
       console.log('Elemento vacio')
+      setError('Escriba algo por favor')
       return
     }
     console.log(tarea) // no se despliega hasta que la tarea este vacia
@@ -24,7 +28,9 @@ function App() {
       NombreTarea: tarea
     }]);
 
-    setTarea('') //limpia el formulario
+    setTarea('') //limpia el 
+    setError(null)
+
   }
 
   const eliminarTarea = (id) => {
@@ -39,6 +45,26 @@ function App() {
   const editar = (item) => {
     setModoEdicion(true)
     setTarea(item.NombreTarea) //relaciono el nombre de la tarea con el campo
+    setId(item.id) //aqui ya puedo usar el id
+  }
+
+  const editarTarea = (e) => {
+    e.preventDefault()
+    if (!tarea.trim()) {
+      setError('Escriba algo por favor')
+      return
+    }
+
+    
+    const arrayEditado = tareas.map(
+      item => item.id === id ? {id, NombreTarea: tarea}:item
+      )
+
+      setTareas(arrayEditado)
+      setModoEdicion(false)
+      setTarea('') //relaciono el nombre de la tarea con el campo
+      setId('') //aqui ya puedo usar el id
+      setError(null)
   }
 
   return (
@@ -50,24 +76,29 @@ function App() {
           <h4 className="text-center">Lista de tareas</h4>
           <ul className="list-group">
             {
-              tareas.map(item => (
-                <li className="list-group-item" key={item.id}>
-                  <span className="lead">{item.NombreTarea}</span>
-                  <button
-                    className="btn btn-danger 
-              btn-sm float-end mx-2"
-              onClick={() => eliminarTarea(item.id)}>
-                    Eliminar
-                  </button>
-                  <button
-                    className="btn btn-warning 
-                    btn-sm float-end"
-                    onClick={() => editar(item)}
-                    >
-                    Editar
-                  </button>
-                </li>
-              ))
+
+              tareas.length === 0 ? (
+                  <li className="list-group-item">No hay tareas</li>
+              ) : (
+                tareas.map(item => (
+                  <li className="list-group-item" key={item.id}>
+                    <span className="lead">{item.NombreTarea}</span>
+                    <button
+                      className="btn btn-danger 
+                btn-sm float-end mx-2"
+                onClick={() => eliminarTarea(item.id)}>
+                      Eliminar
+                    </button>
+                    <button
+                      className="btn btn-warning 
+                      btn-sm float-end"
+                      onClick={() => editar(item)}
+                      >
+                      Editar
+                    </button>
+                  </li>
+                ))
+              ) 
             }
 
 
@@ -80,7 +111,10 @@ function App() {
             }
           </h4>
           <form
-            onSubmit={agregarTarea}>
+            onSubmit={modoEdicion ? editarTarea : agregarTarea}>
+            {
+              error ? <span className="text-danger">{error}</span> : null
+            }
             <input
               type="text"
               className="form-control mb-2"
