@@ -52,7 +52,6 @@ function App() {
       setError('Escriba algo por favor')
       return
     }
-
     
     const arrayEditado = tareas.map(
       item => item.id === id ? {id, NombreTarea: tarea}:item
