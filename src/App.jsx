@@ -3,7 +3,6 @@ import {nanoid} from 'nanoid'
 
 function App() {
 
-
   const [tarea, setTarea] = useState('')
   const [tareas, setTareas] = useState([])
   //valor false porque cambia cuando presiono 'agregar'
