@@ -11,7 +11,6 @@ function App() {
   //Toma los errores del form
   const [error, setError] = useState(null)
 
-
   const agregarTarea = (e) => {
     e.preventDefault() //evita que se proceso el formulario con el get
     if (!tarea.trim()) {
