@@ -73,7 +73,6 @@ function App() {
           <h4 className="text-center">Lista de tareas</h4>
           <ul className="list-group">
             {
-
               tareas.length === 0 ? (
                   <li className="list-group-item">No hay tareas</li>
               ) : (
